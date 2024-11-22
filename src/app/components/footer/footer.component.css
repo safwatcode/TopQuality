@@ -16,7 +16,7 @@ footer {
   align-content: center;
 }
 .social-item i {
-  color: black;
+  color: var(--main-dark-color);
   font-size: 30px;
 }
 .footer-company {

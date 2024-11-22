@@ -13,6 +13,8 @@ import { ServicesComponent } from './components/services/services.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ContactComponent,
     TestimonialsComponent,
     FooterComponent,
+    DashboardComponent,
+    AdminComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --main-color: #38b6ff;
+  --main-dark-color: #104378;
+  --hover-color: #38b6ff;
+  --clicked-color: #38b6ff;
+  --bg-color: #f8f9fa;
+  --text-color: #343a40;
+  --font-size: 16px;
+  --heading-font-size: 28px;
+  --footer-bg-color: #f8f9fa;
+  --footer-text-color: #343a40;
+  --navbar-bg-color: #343a40;
+  --navbar-text-color: #f8f9fa;
+  --social-media-color: #343a40;
+  /* Fonts */
+  --MerriweatherSans-font-family: "Merriweather Sans", sans-serif;
+  --Montserrat-font-family: "Montserrat", sans-serif;
+  --League-Spartan-font-family: "League Spartan", sans-serif;
+  --Titillium-Web-font-family: "Titillium Web", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: var(--MerriweatherSans-font-family);
+}
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  flex: 1;
+}
