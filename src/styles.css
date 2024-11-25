@@ -1,3 +1,4 @@
+/* @import "bootstrap/dist/css/bootstrap.css"; */
 :root {
   --main-color: #38b6ff;
   --main-dark-color: #104378;
@@ -22,6 +23,9 @@
 * {
   box-sizing: border-box;
   font-family: var(--MerriweatherSans-font-family);
+}
+body {
+  scroll-behavior: smooth;
 }
 .app-wrapper {
   display: flex;

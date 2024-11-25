@@ -1,1 +1,82 @@
-<p>contact works!</p>
+<div class="px-4 pb-5 text-center">
+  <img class="d-block mx-auto" src="/images/Top-Quality-logo.svg" alt="" width="200" height="200">
+  <h1 class="display-5 fw-bold text-body-emphasis">We are always here!</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">
+      We're here to help you every step of the way. Whether you have questions, feedback, or just want to say hello,
+      we'd love to hear from you!
+    </p>
+  </div>
+  <!-- Form -->
+  <div class="container-fluid justify-content-center align-content-center px-5 my-5">
+    <div class="row justify-content-center align-content-center">
+      <div class="col-xl-10">
+        <div class="card border-0 rounded-3 shadow-lg overflow-hidden">
+          <div class="card-body p-0">
+            <div class="row g-0">
+              <div class="col-sm-6 d-none d-sm-block align-content-center">
+                <img class="contact-image mx-auto" src="/images/contact-us.png" alt="">
+              </div>
+              <div class="col-sm-6 p-4 justify-content-center align-content-center">
+                <!-- Form -->
+                <form id="contactForm" method="post" #ContactForm="ngForm" (ngSubmit)="contact(ContactForm)">
+                  <!-- Name Input -->
+                  <div class="form-floating mb-3">
+                    <input class="form-control" name="username" type="text" placeholder="Name" required ngModel
+                      #username="ngModel" />
+                    @if(username.invalid && username.touched) {
+                    <div class="error">Name is required</div>
+                    }
+                    <label for="name">Full Name</label>
+                  </div>
+
+                  <!-- Email Input -->
+                  <div class="form-floating mb-3">
+                    <input class="form-control" name="email" id="name" type="email" email placeholder="Email" required
+                      ngModel #email="ngModel" />
+                    @if(email.invalid && email.touched) {
+                    <div class="error">Email is required</div>
+                    }
+                    <label for="emailAddress">Email</label>
+
+                  </div>
+                  <!-- Message Input -->
+                  <div class="form-floating mb-3">
+                    <textarea class="textrea-height form-control" name="message" type="text" placeholder="Message"
+                      required ngModel #message="ngModel"></textarea>
+                    @if(message.invalid && message.touched) {
+                    <div class="error">Message is required</div>
+                    }
+                    <label for="message">Message</label>
+                  </div>
+                  <div class="d-grid">
+                    <button type="submit" [disabled]="ContactForm.invalid" class="btn btn-primary btn-lg"
+                      id="submitButton">Send</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Send Modal -->
+  <!-- <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="successModalLabel">Success</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Message sent successfully!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>
