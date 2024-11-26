@@ -1,3 +1,4 @@
+/* About Jumptron */
 .about {
   background-image: url("/images/verne-ho-0LAJfSNa-xQ-unsplash.jpg");
   background-image: url("/images/windows-to-sea.jpg");
@@ -5,6 +6,8 @@
   background-position: center 70%;
   background-repeat: no-repeat;
   background-size: cover;
+  height: calc(100vh - 83px);
+  align-content: center;
 }
 .about > img {
   width: 200px;
@@ -25,4 +28,134 @@
   background-color: black;
   color: white;
   padding: 5px;
+}
+/* Timeline */
+.timeline {
+  position: relative;
+  padding: 20px 0;
+  list-style: none;
+}
+
+.timeline-item {
+  position: relative;
+  margin: 20px 0;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background: #007bff;
+  z-index: 1;
+}
+
+.timeline-content {
+  position: relative;
+  background: #fff;
+  border-radius: 5px;
+  padding: 15px;
+  width: 45%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content h3 {
+  margin-top: 0;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+  left: 0;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  left: 55%;
+}
+
+.timeline-item:nth-child(even)::before {
+  left: 55%;
+}
+
+@media (max-width: 768px) {
+  .timeline-content {
+    width: 100%;
+    left: 0;
+  }
+  .timeline-item::before {
+    left: 0;
+  }
+}
+
+/* Our Team */
+.team-member {
+  border: 1px solid #007bff;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  transition: transform 0.2s;
+}
+.team-member:hover {
+  transform: scale(1.05);
+}
+.team-member img {
+  /* border-radius: 50%; */
+  width: 200px;
+  height: 200px;
+  margin-bottom: 10px;
+}
+
+/* Values */
+.value-row {
+  background-color: #e7f3ff; /* Light blue background */
+}
+.value-card {
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s; /* Animation effect */
+  display: flex; /* Enable Flexbox */
+  flex-direction: column; /* Stack content vertically */
+  justify-content: space-between; /* Space out content */
+  height: 100%; /* Make card take full height */
+}
+.value-card:hover {
+  transform: scale(1.05); /* Scale effect on hover */
+}
+/* Additional styles for headings */
+.value-card h3 {
+  color: #333; /* Dark text color */
+}
+/* Additional styles for paragraphs */
+.value-card p {
+  color: #555; /* Medium text color */
+}
+
+/* Call To Action */
+.cta-section {
+  background-color: #183153;
+  color: white;
+  padding: 50px 0;
+  margin-top: 20px;
+  text-align: center;
+}
+.cta-section h1 i {
+  color: #ffc107;
+}
+.cta-button {
+  display: block;
+  background-color: #ffc107; /* Bootstrap warning color */
+  color: #333; /* Dark text color */
+  width: 300px;
+  border: none;
+  padding: 15px 30px;
+  margin: 20px auto;
+  font-size: 1.25rem;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s; /* Animation effects */
+}
+.cta-button:hover {
+  background-color: #e0a800; /* Darker yellow on hover */
+  transform: scale(1.05); /* Scale effect on hover */
 }

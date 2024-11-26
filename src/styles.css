@@ -27,6 +27,9 @@
 body {
   scroll-behavior: smooth;
 }
+a {
+  text-decoration: none;
+}
 .app-wrapper {
   display: flex;
   flex-direction: column;

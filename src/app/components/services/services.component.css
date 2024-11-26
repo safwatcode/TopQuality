@@ -1,0 +1,10 @@
+.services-section {
+  background-image: url("/images/close-up-modern-office-buildings.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* color: white; */
+  width: 100%;
+  height: calc(100vh - 83px);
+  align-content: center;
+}
