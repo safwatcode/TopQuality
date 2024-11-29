@@ -8,3 +8,38 @@
   height: calc(100vh - 83px);
   align-content: center;
 }
+/* Card Hover Animation */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Header Section */
+header {
+  background: linear-gradient(to bottom right, #007bff, #0056b3);
+}
+
+.about > img {
+  width: 200px;
+}
+.about-head {
+  color: black;
+  font-size: 55px;
+  font-weight: 900;
+  letter-spacing: 5px;
+}
+.about-desc {
+  color: black;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+.about-desc span {
+  background-color: black;
+  color: white;
+  padding: 5px;
+}

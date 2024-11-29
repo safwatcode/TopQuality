@@ -1,1 +1,75 @@
-<p>portfolio works!</p>
+<main>
+  <section class="pb-5 px-0 text-center container-fluid">
+    <div class="about p-5 text-center">
+      <h1 class="about-head text-body-emphasis">Our Works</h1>
+      <p class="about-desc col-lg-8 mx-auto fs-5">
+        where magic, <span class="text-white text-bg-dark p-1">comes true</span>
+      </p>
+    </div>
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </section>
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" *ngIf="!isLoading && works.length > 0">
+        <div class="col" *ngFor="let work of works">
+          <div class="card shadow-sm">
+            <img [src]="'http://localhost:3000/uploads/' + work.image" class="card-img-top" alt="{{ work.title }}" />
+            <div class="card-body">
+              <h5 class="card-title">{{ work.title }}</h5>
+              <p class="card-text text-muted">{{ work.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- <section class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Our Latest Works</h2>
+    <div class="row g-4" *ngIf="!isLoading && works.length > 0">
+      <div class="col-lg-4 col-md-6" *ngFor="let work of works">
+        <div class="card shadow-sm h-100">
+          <img [src]="'http://localhost:3000/uploads/' + work.image" class="card-img-top" alt="{{ work.title }}" />
+          <div class="card-body">
+            <h5 class="card-title">{{ work.title }}</h5>
+            <p class="card-text text-muted">{{ work.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading && works.length === 0" class="text-center">
+      <p>No works to display right now.</p>
+    </div>
+  </div>
+</section> -->
+
+
+
+<!-- List of Works -->
+<!-- <div *ngIf="works.length" class="row row-cols-1 row-cols-md-2 g-4">
+  <div *ngFor="let work of works" class="col">
+    <div class="card h-100 shadow-sm">
+      <img [src]="'http://localhost:3000/uploads/' + work.image" class="card-img-top" [alt]="work.title" />
+      <div class="card-body">
+        <h5 class="card-title">{{ work.title }}</h5>
+        <p class="card-text">{{ work.description }}</p>
+      </div>
+
+    </div>
+  </div>
+</div> -->
+
+
+
+<!-- Message for Empty Works -->
+<!-- <div *ngIf="!works.length" class="text-center mt-5">
+  <p class="text-muted">No works found. Add a new one!</p>
+</div> -->

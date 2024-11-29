@@ -1,0 +1,85 @@
+<div>
+  <div id="home" class="content-section">
+    <!-- Form for Adding a New Work -->
+    <form (submit)="addWork()" class="mb-4 p-3 border rounded shadow-sm bg-light">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" id="title" [(ngModel)]="newWork.title" name="title" class="form-control"
+          placeholder="Enter title" required />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" [(ngModel)]="newWork.description" name="description" class="form-control" rows="3"
+          placeholder="Enter description" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload Image</label>
+        <input type="file" id="image" class="form-control" (change)="onFileChange($event)" required />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Add Work</button>
+    </form>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="editWorkModal" tabindex="-1" aria-labelledby="editWorkModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editWorkModalLabel">Edit Work</h5>
+        <!-- Close Button -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="updateWork()">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" [(ngModel)]="selectedWork.title" name="title" required />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" [(ngModel)]="selectedWork.description" name="description"
+              required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" id="image" (change)="onFileChange($event)" />
+          </div>
+          <button type="submit" class="btn btn-primary">Update Work</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="album py-5 bg-body-tertiary">
+  <div class="container">
+    <h2 class="text-center">Works</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" *ngIf="!isLoading && works.length > 0">
+      <div class="col" *ngFor="let work of works">
+        <div class="card shadow-sm">
+          <img [src]="'http://localhost:3000/uploads/' + work.image" class="card-img-top" alt="{{ work.title }}" />
+          <div class="card-body">
+            <h5 class="card-title">{{ work.title }}</h5>
+            <p class="card-text text-muted">{{ work.description }}</p>
+          </div>
+          <div class="card-footer d-flex justify-content-end gap-2">
+            <button class="btn btn-primary btn-sm" (click)="openEditModal(work)">
+              Edit
+            </button>
+            <button (click)="deleteWork(work._id)" class="btn btn-danger btn-sm">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- Message for Empty Works -->
+  <div *ngIf="!works.length" class="text-center mt-5">
+    <p class="text-muted">No works found. Add a new one!</p>
+  </div>
+</div>

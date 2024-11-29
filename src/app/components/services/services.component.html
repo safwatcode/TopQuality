@@ -3,14 +3,39 @@
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="services-header fw-light fs-1 fw-bold text-dark">Services</h1>
-        <p class="services-text lead text-body-secondary fs-4 fw-bolder text-white">
-          Whatever we do, we do it perfectly.
+        <p class="services-text lead text-body-secondary fs-4 fw-bolder">
+          Whatever we do,<span class="text-white text-bg-dark p-1">We do it perfectly.</span>
         </p>
+      </div>
+      <!-- Loading Spinner -->
+      <div *ngIf="isLoading" class="text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="album py-5 bg-body-tertiary">
+  <main>
+    <div class="album py-5 bg-body-tertiary">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" *ngIf="!isLoading && services.length > 0">
+          <div class="col" *ngFor="let service of services">
+            <div class="card shadow-sm">
+              <img [src]="'http://localhost:3000/uploads/' + service.image" class="card-img-top"
+                alt="{{ service.title }}" />
+              <div class="card-body">
+                <h5 class="card-title">{{ service.title }}</h5>
+                <p class="card-text text-muted">{{ service.description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- <div class="album py-5 bg-body-tertiary">
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -99,6 +124,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 </main>

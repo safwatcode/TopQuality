@@ -5,8 +5,7 @@
   color: var(--hover-color);
   cursor: pointer;
 }
-.active {
+.links .active {
   font-weight: bold;
   color: var(--clicked-color);
-
 }

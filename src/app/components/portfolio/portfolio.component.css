@@ -1,0 +1,45 @@
+/* Card Hover Animation */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Header Section */
+header {
+  background: linear-gradient(to bottom right, #007bff, #0056b3);
+}
+
+.about {
+  /* background-image: url("/images/verne-ho-0LAJfSNa-xQ-unsplash.jpg"); */
+  /* background-image: url("/images/windows-to-sea.jpg"); */
+  background-image: url("/images/buildings-around.jpg");
+  background-position: center 70%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: calc(100vh - 83px);
+  align-content: center;
+}
+.about > img {
+  width: 200px;
+}
+.about-head {
+  color: black;
+  font-size: 55px;
+  font-weight: 900;
+  letter-spacing: 5px;
+}
+.about-desc {
+  color: black;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+.about-desc span {
+  background-color: black;
+  color: white;
+  padding: 5px;
+}
