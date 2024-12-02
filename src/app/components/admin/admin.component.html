@@ -1,13 +1,24 @@
-<h2 class="my-3 text-center">Top Quality Dashboard</h2>
-<div class="container mt-5">
+<!-- Header -->
+<header class="dashboard-header bg-light text-black p-3">
+  <div class="d-flex justify-content-lg-between align-items-center">
+    <h2 class="mb-0">Admin Dashboard</h2>
+    <button class="btn btn-danger" (click)="logout()">Logout</button>
+  </div>
+</header>
+
+<!-- Main Content Area -->
+<div class="container-fluid mt-4">
   <div class="row">
-    <div class="col-md-3">
-      <app-dashboard-sidebar></app-dashboard-sidebar>
+    <!-- Sidebar -->
+    <div class="col-2">
+      <div class="sidebar text-black">
+        <app-dashboard-sidebar></app-dashboard-sidebar>
+      </div>
     </div>
-    <div class="col-md-9">
-      <router-outlet />
+    <!-- Main Content Area -->
+    <div class="main-content col-10">
+      <router-outlet></router-outlet>
     </div>
+
   </div>
 </div>
-
-<!-- <app-dashboard></app-dashboard> -->

@@ -26,6 +26,7 @@ import { AboutDashboardComponent } from './components/about-dashboard/about-dash
 import { ServicesDashboardComponent } from './components/services-dashboard/services-dashboard.component';
 import { ContactDashboardComponent } from './components/contact-dashboard/contact-dashboard.component';
 import { ServiceService } from './service.service';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ServiceService } from './service.service';
     AboutDashboardComponent,
     ServicesDashboardComponent,
     ContactDashboardComponent,
+    LoginComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [WorksService, ServiceService],

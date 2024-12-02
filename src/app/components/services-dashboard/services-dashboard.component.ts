@@ -38,15 +38,26 @@ export class ServicesDashboardComponent implements OnInit {
     this.selectedService = { ...service };
     this.selectedImage = null;
 
+    // Check if the modal element exists before trying to show it
+    const modalElement = document.getElementById('editServiceModal');
+
+    if (!modalElement) {
+      console.error('Modal element not found!');
+      return;
+    }
+
+    // Create modal instance and show it
+    const modal = new bootstrap.Modal(modalElement);
+    modal.show(); // Show the modal
+  }
+
+  closeModal() {
     const modalElement = document.getElementById('editServiceModal');
     if (modalElement) {
       const modal = new bootstrap.Modal(modalElement);
-      modal.show(); // Show the modal
-    } else {
-      console.error('Modal element not found!');
+      modal.hide();
     }
   }
-
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
@@ -96,6 +107,7 @@ export class ServicesDashboardComponent implements OnInit {
           const modalElement = document.getElementById('editServiceModal');
           const modal = new bootstrap.Modal(modalElement!);
           modal.hide();
+          // modalElement.style.display = "none";
 
           const index = this.services.findIndex(
             (s) => s._id === updatedService._id

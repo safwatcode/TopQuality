@@ -37,4 +37,5 @@ a {
 }
 main {
   flex: 1;
+  /* align-content: center; */
 }

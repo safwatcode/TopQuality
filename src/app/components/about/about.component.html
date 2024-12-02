@@ -1,13 +1,13 @@
-<div class="about p-5 text-center">
+<!-- <div class="about p-5 text-center">
   <img class="d-block mx-auto" src="/images/Top-Quality-logo.svg" alt="Top Quality logo">
   <h1 class="about-head text-body-emphasis">TOP QUALITY</h1>
   <p class="about-desc col-lg-8 mx-auto fs-5">
     More than a company, <span class="text-white text-bg-dark">not just a product</span>
   </p>
-</div>
+</div> -->
 
 <!-- Timeline  -->
-<div class="container mt-5">
+<!-- <div class="container mt-5">
   <h1 class="text-center my-0 mx-auto">Our Journey</h1>
   <ul class="timeline">
     <li class="timeline-item">
@@ -41,14 +41,13 @@
       </div>
     </li>
   </ul>
-</div>
+</div> -->
 
 <!-- Our Team -->
-<div class="container mt-5">
+<!-- <div class="container mt-5">
   <h1 class="text-center mb-4">Meet Our Team</h1>
-  <div class="row">
-    <!-- CEOs -->
-    <div class="col-md-4">
+  <div class="row"> -->
+    <!-- <div class="col-md-4">
       <div class="team-member">
         <img src="images/Top-Quality-logo.svg" alt="CEO 1">
         <h3>CEO 1</h3>
@@ -68,10 +67,10 @@
         <h3>CEO 3</h3>
         <p>Chief Executive Officer</p>
       </div>
-    </div>
+    </div> -->
 
     <!-- Technicians -->
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
       <div class="team-member">
         <img src="images/Top-Quality-logo.svg" alt="Technician 1">
         <h3>Technician 1</h3>
@@ -119,10 +118,10 @@
         <h3>Technician 7</h3>
         <p>Technician</p>
       </div>
-    </div>
+    </div> -->
 
     <!-- Accountant -->
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
       <div class="team-member">
         <img src="images/IT-Safwat-Ahmed.jpg" alt="IT">
         <h3>IT</h3>
@@ -130,7 +129,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- Carousel (If needed) -->
 <!-- <div class="container mt-5">
@@ -165,7 +164,7 @@
 </div> -->
 
 <!-- Values -->
-<div class="container mt-5">
+<!-- <div class="container mt-5">
   <h1 class="text-center mb-4">Our Company Values</h1>
   <div class="value-row row">
     <div class="col-md-3 p-2">
@@ -226,4 +225,58 @@
   </h1>
   <p>Take a small trip into our latest work. See You There!</p>
   <a routerLink="/portfolio" routerLinkActive="active" class="cta-button">See Our Portfolio</a>
+</div> -->
+
+
+<div class="about p-5 text-center">
+  <img class="d-block mx-auto" [src]="aboutData?.logo" alt="Top Quality logo">
+  <h1 class="about-head text-body-emphasis">{{ aboutData?.heading }}</h1>
+  <p class="about-desc col-lg-8 mx-auto fs-5">
+    {{ aboutData?.subheading }}
+  </p>
+</div>
+
+<div class="container mt-5">
+  <h1 class="text-center my-0 mx-auto">Our Journey</h1>
+  <ul class="timeline">
+    <li class="timeline-item" *ngFor="let item of aboutData?.timeline">
+      <div class="timeline-content">
+        <h3>{{ item.year }}</h3>
+        <p>{{ item.description }}</p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Meet Our Team</h1>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let member of aboutData?.team">
+      <div class="team-member text-center">
+        <img [src]="member.image" alt="{{ member.name }}">
+        <h3>{{ member.name }}</h3>
+        <p>{{ member.role }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Our Company Values</h1>
+  <div class="row">
+    <div class="col-md-3 p-2" *ngFor="let value of aboutData?.values">
+      <div class="value-card">
+        <h3>{{ value.title }}</h3>
+        <p>{{ value.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h1>
+    {{ aboutData?.cta.heading }}
+  </h1>
+  <p>{{ aboutData?.cta.description }}</p>
+  <a [routerLink]="aboutData?.cta.buttonLink" class="cta-button">{{ aboutData?.cta.buttonText }}</a>
 </div>

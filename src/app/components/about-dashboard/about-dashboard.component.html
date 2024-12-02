@@ -1,5 +1,142 @@
-<div id="about" class="content-section mt-4">
-  <h2>About</h2>
-  <textarea class="form-control" rows="5" placeholder="Edit About Content"></textarea>
-  <button class="btn btn-primary mt-2">Save</button>
+<div class="container mt-4">
+  <h2 class="text-center">Manage About Page</h2>
+
+  <!-- Edit About General Section -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h4>General Information</h4>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="updateGeneralInfo()">
+        <div class="mb-3">
+          <label for="logo" class="form-label">Logo URL</label>
+          <input
+            type="text"
+            class="form-control"
+            id="logo"
+            [(ngModel)]="aboutData.logo"
+            name="logo"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="heading" class="form-label">Heading</label>
+          <input
+            type="text"
+            class="form-control"
+            id="heading"
+            [(ngModel)]="aboutData.heading"
+            name="heading"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="subheading" class="form-label">Subheading</label>
+          <input
+            type="text"
+            class="form-control"
+            id="subheading"
+            [(ngModel)]="aboutData.subheading"
+            name="subheading"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Update General Info</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Timeline Section -->
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between">
+      <h4>Timeline</h4>
+      <button class="btn btn-success btn-sm" (click)="addTimeline()">Add New</button>
+    </div>
+    <div class="card-body">
+      <div *ngFor="let timeline of aboutData.timeline; let i = index" class="mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <input
+            type="text"
+            class="form-control me-2"
+            [(ngModel)]="timeline.year"
+            [name]="'timelineYear' + i"
+            placeholder="Year"
+          />
+          <input
+            type="text"
+            class="form-control me-2"
+            [(ngModel)]="timeline.description"
+            [name]="'timelineDesc' + i"
+            placeholder="Description"
+          />
+          <button class="btn btn-danger btn-sm" (click)="deleteTimeline(i)">Delete</button>
+        </div>
+      </div>
+      <button class="btn btn-primary" (click)="updateTimeline()">Save Timeline</button>
+    </div>
+  </div>
+
+  <!-- Edit Team Section -->
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between">
+      <h4>Team</h4>
+      <button class="btn btn-success btn-sm" (click)="addTeamMember()">Add New</button>
+    </div>
+    <div class="card-body">
+      <div *ngFor="let member of aboutData.team; let i = index" class="mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <input
+            type="text"
+            class="form-control me-2"
+            [(ngModel)]="member.name"
+            [name]="'teamName' + i"
+            placeholder="Name"
+          />
+          <input
+            type="text"
+            class="form-control me-2"
+            [(ngModel)]="member.role"
+            [name]="'teamRole' + i"
+            placeholder="Role"
+          />
+          <input
+            type="text"
+            class="form-control me-2"
+            [(ngModel)]="member.image"
+            [name]="'teamImage' + i"
+            placeholder="Image URL"
+          />
+          <button class="btn btn-danger btn-sm" (click)="deleteTeamMember(i)">Delete</button>
+        </div>
+      </div>
+      <button class="btn btn-primary" (click)="updateTeam()">Save Team</button>
+    </div>
+  </div>
+
+  <!-- Edit Values Section -->
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between">
+      <h4>Company Values</h4>
+      <button class="btn btn-success btn-sm" (click)="addValue()">Add New</button>
+    </div>
+    <div class="card-body">
+      <div *ngFor="let value of aboutData.values; let i = index" class="mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <input
+            type="text"
+            class="form-control me-2"
+            [(ngModel)]="value.title"
+            [name]="'valueTitle' + i"
+            placeholder="Title"
+          />
+          <input
+            type="text"
+            class="form-control me-2"
+            [(ngModel)]="value.description"
+            [name]="'valueDesc' + i"
+            placeholder="Description"
+          />
+          <button class="btn btn-danger btn-sm" (click)="deleteValue(i)">Delete</button>
+        </div>
+      </div>
+      <button class="btn btn-primary" (click)="updateValues()">Save Values</button>
+    </div>
+  </div>
 </div>

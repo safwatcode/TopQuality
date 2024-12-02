@@ -40,17 +40,13 @@ export class PortfolioDashboardComponent implements OnInit {
   openEditModal(work: any): void {
     this.selectedWork = { ...work }; // Make a copy of the selected work
     this.selectedImage = null; // Reset the selected image
-
-    const modalElement = document.getElementById('editWorkModal');
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show(); // Show the modal
-    } else {
-      console.error('Modal element not found!');
-    }
+    const modal = new bootstrap.Modal(
+      document.getElementById('editWorkModal')!
+    );
+    modal.show();
   }
 
-  onFileChange(event: any) {
+  onFileChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
       this.newWork.image = file;
@@ -109,12 +105,11 @@ export class PortfolioDashboardComponent implements OnInit {
         // Find and hide the modal
         const modalElement = document.getElementById('editWorkModal');
         if (modalElement) {
-          const modal = new bootstrap.Modal(modalElement);
+          const modal = new bootstrap.Modal(modalElement!);
           modal.hide(); // Hide the modal after updating work
         } else {
           console.error('Modal element not found!');
         }
-
         // Update the work in the list
         const index = this.works.findIndex((w) => w._id === updatedWork._id);
         if (index !== -1) {

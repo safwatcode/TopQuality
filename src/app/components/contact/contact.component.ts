@@ -13,8 +13,6 @@ export class ContactComponent {
   message: string = '';
   contact(ContactForm: NgForm) {
     console.log(ContactForm.value);
-    // $('#successModal').modal('show');
-    // reset the form after submission
     ContactForm.reset();
   }
 }

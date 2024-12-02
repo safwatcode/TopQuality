@@ -1,6 +1,7 @@
 import { ServicesDashboardComponent } from './components/services-dashboard/services-dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
@@ -11,10 +12,12 @@ import { PortfolioDashboardComponent } from './components/portfolio-dashboard/po
 import { HomeDashboardComponent } from './components/home-dashboard/home-dashboard.component';
 import { AboutDashboardComponent } from './components/about-dashboard/about-dashboard.component';
 import { ContactDashboardComponent } from './components/contact-dashboard/contact-dashboard.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'portfolio', component: PortfolioComponent },
@@ -22,7 +25,9 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AuthGuard],
     children: [
+      { path: '', redirectTo: 'home-dashboard', pathMatch: 'full' },
       {
         path: 'home-dashboard',
         component: HomeDashboardComponent,
@@ -43,6 +48,7 @@ const routes: Routes = [
         path: 'contact-dashboard',
         component: ContactDashboardComponent,
       },
+      { path: '**', component: HomeDashboardComponent },
     ],
   },
 
