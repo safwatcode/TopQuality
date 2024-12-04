@@ -8,22 +8,15 @@
       <form (ngSubmit)="addTimelineEntry()" #timelineForm="ngForm">
         <div class="row">
           <div class="col-md-3">
-            <input type="number" class="form-control"
-              [(ngModel)]="newTimelineEntry.year"
-              name="year"
-              placeholder="Year"
+            <input type="number" class="form-control" [(ngModel)]="newTimelineEntry.year" name="year" placeholder="Year"
               required>
           </div>
           <div class="col-md-6">
-            <input type="text" class="form-control"
-              [(ngModel)]="newTimelineEntry.description"
-              name="description"
-              placeholder="Description"
-              required>
+            <input type="text" class="form-control" [(ngModel)]="newTimelineEntry.description" name="description"
+              placeholder="Description" required>
           </div>
           <div class="col-md-3">
-            <button type="submit" class="btn btn-primary"
-              [disabled]="!timelineForm.form.valid">
+            <button type="submit" class="btn btn-primary" [disabled]="!timelineForm.form.valid">
               Add Timeline Entry
             </button>
           </div>
@@ -59,24 +52,15 @@
       <form (ngSubmit)="addTeamMember()" #teamForm="ngForm">
         <div class="row">
           <div class="col-md-3">
-            <input type="text" class="form-control"
-              [(ngModel)]="newTeamMember.name"
-              name="name"
-              placeholder="Name"
+            <input type="text" class="form-control" [(ngModel)]="newTeamMember.name" name="name" placeholder="Name"
               required>
           </div>
           <div class="col-md-3">
-            <input type="text" class="form-control"
-              [(ngModel)]="newTeamMember.role"
-              name="role"
-              placeholder="Role"
+            <input type="text" class="form-control" [(ngModel)]="newTeamMember.role" name="role" placeholder="Role"
               required>
           </div>
           <div class="col-md-3">
-            <select class="form-control"
-              [(ngModel)]="newTeamMember.category"
-              name="category"
-              required>
+            <select class="form-control" [(ngModel)]="newTeamMember.category" name="category" required>
               <option value="">Select Category</option>
               <option value="CEO">CEO</option>
               <option value="Technician">Technician</option>
@@ -84,13 +68,10 @@
             </select>
           </div>
           <div class="col-md-3">
-            <input type="file" class="form-control"
-              (change)="onFileSelected($event)"
-              name="image">
+            <input type="file" class="form-control" (change)="onFileSelected($event)" name="image">
           </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-2"
-          [disabled]="!teamForm.form.valid">
+        <button type="submit" class="btn btn-primary mt-2" [disabled]="!teamForm.form.valid">
           Add Team Member
         </button>
       </form>
@@ -107,10 +88,14 @@
         </thead>
         <tbody>
           <tr *ngFor="let member of teamMembers">
+            <!--           <img
+          [src]="'http://localhost:3000/uploads/' + member.image"
+            alt="{{member.name}}"
+            class="card-img-top"
+          > -->
             <td>
-              <img [src]="member.image ? '/uploads/' + member.image : ''"
-                   alt="{{member.name}}"
-                   style="max-width: 50px; max-height: 50px;">
+              <img [src]="'http://localhost:3000/uploads/' + member.image" alt="{{member.name}}"
+                style="max-width: 50px; max-height: 50px;">
             </td>
             <td>{{member.name}}</td>
             <td>{{member.role}}</td>
@@ -132,22 +117,15 @@
       <form (ngSubmit)="addCompanyValue()" #valueForm="ngForm">
         <div class="row">
           <div class="col-md-4">
-            <input type="text" class="form-control"
-              [(ngModel)]="newCompanyValue.title"
-              name="title"
-              placeholder="Value Title"
-              required>
+            <input type="text" class="form-control" [(ngModel)]="newCompanyValue.title" name="title"
+              placeholder="Value Title" required>
           </div>
           <div class="col-md-6">
-            <input type="text" class="form-control"
-              [(ngModel)]="newCompanyValue.description"
-              name="description"
-              placeholder="Description"
-              required>
+            <input type="text" class="form-control" [(ngModel)]="newCompanyValue.description" name="description"
+              placeholder="Description" required>
           </div>
           <div class="col-md-2">
-            <button type="submit" class="btn btn-primary"
-              [disabled]="!valueForm.form.valid">
+            <button type="submit" class="btn btn-primary" [disabled]="!valueForm.form.valid">
               Add Value
             </button>
           </div>

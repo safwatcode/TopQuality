@@ -1,10 +1,10 @@
-<!-- <div class="about p-5 text-center">
+<div class="about p-5 text-center">
   <img class="d-block mx-auto" src="/images/Top-Quality-logo.svg" alt="Top Quality logo">
   <h1 class="about-head text-body-emphasis">TOP QUALITY</h1>
   <p class="about-desc col-lg-8 mx-auto fs-5">
     More than a company, <span class="text-white text-bg-dark">not just a product</span>
   </p>
-</div> -->
+</div>
 
 <!-- Timeline  -->
 <!-- <div class="container mt-5">
@@ -131,37 +131,6 @@
   </div>
 </div> -->
 
-<!-- Carousel (If needed) -->
-<!-- <div class="container mt-5">
-  <h1 class="text-center">Meet Our Team</h1>
-  <div id="teamCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active text-center">
-        <img src="images/Top-Quality-logo.svg" class="rounded-circle" alt="Team Member 1">
-        <h5>Flora Nyra</h5>
-        <p>Product Manager</p>
-      </div>
-      <div class="carousel-item text-center">
-        <img src="images/Top-Quality-logo.svg" class="rounded-circle" alt="Team Member 2">
-        <h5>Evander Mac</h5>
-        <p>Art Director</p>
-      </div>
-      <div class="carousel-item text-center">
-        <img src="images/Top-Quality-logo.svg" class="rounded-circle" alt="Team Member 3">
-        <h5>Taytum Elia</h5>
-        <p>Investment Planner</p>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#teamCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#teamCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-</div> -->
 
 <!-- Values -->
 <!-- <div class="container mt-5">
@@ -217,15 +186,8 @@
     </div>
   </div>
 </div>
+-->
 
-<div class="cta-section">
-  <h1>
-    Ready to see our magic?
-    <i class="fa-solid fa-wand-magic-sparkles"></i>
-  </h1>
-  <p>Take a small trip into our latest work. See You There!</p>
-  <a routerLink="/portfolio" routerLinkActive="active" class="cta-button">See Our Portfolio</a>
-</div> -->
 
 
 <!-- <div class="about p-5 text-center">
@@ -301,9 +263,9 @@
       <div *ngFor="let member of teamMembers" class="col-md-4 mb-4">
         <div class="team-member text-center">
           <img
-            [src]="member.image ? '/uploads/' + member.image : 'assets/default-avatar.png'"
+          [src]="'http://localhost:3000/uploads/' + member.image"
             alt="{{member.name}}"
-            class="img-fluid rounded-circle mb-3"
+            class="card-img-top"
           >
           <h3>{{member.name}}</h3>
           <p>{{member.role}}</p>
@@ -314,9 +276,9 @@
       <div *ngFor="let member of teamMembers" class="col-md-4 mb-4">
         <div class="team-member text-center">
           <img
-            [src]="member.image ? '/uploads/' + member.image : 'assets/default-avatar.png'"
+          [src]="'http://localhost:3000/uploads/' + member.image"
             alt="{{member.name}}"
-            class="img-fluid rounded-circle mb-3"
+            class="card-img-top"
           >
           <h3>{{member.name}}</h3>
           <p>{{member.role}}</p>
@@ -326,10 +288,12 @@
       <!-- IT and Management -->
       <div *ngFor="let member of teamMembers" class="col-md-4 mb-4">
         <div class="team-member text-center">
+          <!--               <img [src]="'http://localhost:3000/uploads/' + service.image" class="card-img-top"
+ -->
           <img
-            [src]="member.image ? '/uploads/' + member.image : 'assets/default-avatar.png'"
+          [src]="'http://localhost:3000/uploads/' + member.image"
             alt="{{member.name}}"
-            class="img-fluid rounded-circle mb-3"
+            class="card-img-top"
           >
           <h3>{{member.name}}</h3>
           <p>{{member.role}}</p>
@@ -350,4 +314,12 @@
       </div>
     </div>
   </div>
+</div>
+<div class="cta-section">
+  <h1>
+    Ready to see our magic?
+    <i class="fa-solid fa-wand-magic-sparkles"></i>
+  </h1>
+  <p>Take a small trip into our latest work. See You There!</p>
+  <a routerLink="/portfolio" routerLinkActive="active" class="cta-button">See Our Portfolio</a>
 </div>
