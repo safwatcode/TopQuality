@@ -33,11 +33,23 @@
         </thead>
         <tbody>
           <tr *ngFor="let entry of timeline">
-            <td>{{entry.year}}</td>
-            <td>{{entry.description}}</td>
             <td>
-              <!-- <button class="btn btn-sm btn-warning mr-2" (click)="editTimelineEntry(entry)">Edit</button> -->
-              <button class="btn btn-sm btn-danger" (click)="deleteTimelineEntry(entry._id)">Delete</button>
+              <!-- Edit Year or Display -->
+              <input *ngIf="entry.isEditing" type="number" [(ngModel)]="entry.year" class="form-control" />
+              <span *ngIf="!entry.isEditing">{{ entry.year }}</span>
+            </td>
+            <td>
+              <!-- Edit Description or Display -->
+              <input *ngIf="entry.isEditing" type="text" [(ngModel)]="entry.description" class="form-control" />
+              <span *ngIf="!entry.isEditing">{{ entry.description }}</span>
+            </td>
+            <td>
+              <!-- Edit or Save Button -->
+              <button *ngIf="!entry.isEditing" class="btn btn-sm btn-primary"
+                (click)="editTimelineEntry(entry)">Edit</button>
+              <button *ngIf="entry.isEditing" class="btn btn-sm btn-success"
+                (click)="saveTimelineEntry(entry)">Save</button>
+              <button class="ms-3 btn btn-sm btn-danger" (click)="deleteTimelineEntry(entry._id)">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -68,7 +80,7 @@
             </select>
           </div>
           <div class="col-md-3">
-            <input type="file" class="form-control" (change)="onFileSelected($event)" name="image">
+            <input type="file" class="form-control" (change)="onFileSelected($event,member)" name="image">
           </div>
         </div>
         <button type="submit" class="btn btn-primary mt-2" [disabled]="!teamForm.form.valid">
@@ -88,21 +100,39 @@
         </thead>
         <tbody>
           <tr *ngFor="let member of teamMembers">
-            <!--           <img
-          [src]="'http://localhost:3000/uploads/' + member.image"
-            alt="{{member.name}}"
-            class="card-img-top"
-          > -->
             <td>
-              <img [src]="'http://localhost:3000/uploads/' + member.image" alt="{{member.name}}"
-                style="max-width: 50px; max-height: 50px;">
+              <!-- Edit or Display Image -->
+              <input *ngIf="member.isEditing" type="file" (change)="onFileSelected($event,member)"
+                class="form-control" />
+              <img *ngIf="!member.isEditing" [src]="'http://localhost:3000/uploads/' + member.image"
+                alt="{{member.name}}" style="max-width: 50px; max-height: 50px;">
             </td>
-            <td>{{member.name}}</td>
-            <td>{{member.role}}</td>
-            <td>{{member.category}}</td>
             <td>
-              <!-- <button class="btn btn-sm btn-warning mr-2" (click)="editTeamMember(member)">Edit</button> -->
-              <button class="btn btn-sm btn-danger" (click)="deleteTeamMember(member._id)">Delete</button>
+              <!-- Edit or Display Name -->
+              <input *ngIf="member.isEditing" type="text" [(ngModel)]="member.name" class="form-control" />
+              <span *ngIf="!member.isEditing">{{ member.name }}</span>
+            </td>
+            <td>
+              <!-- Edit or Display Role -->
+              <input *ngIf="member.isEditing" type="text" [(ngModel)]="member.role" class="form-control" />
+              <span *ngIf="!member.isEditing">{{ member.role }}</span>
+            </td>
+            <td>
+              <!-- Edit or Display Category -->
+              <select *ngIf="member.isEditing" [(ngModel)]="member.category" class="form-control">
+                <option value="CEO">CEO</option>
+                <option value="Technician">Technician</option>
+                <option value="IT">IT</option>
+              </select>
+              <span *ngIf="!member.isEditing">{{ member.category }}</span>
+            </td>
+            <td>
+              <!-- Edit, Save or Delete buttons -->
+              <button *ngIf="!member.isEditing" class="btn btn-sm btn-primary mr-2"
+                (click)="editTeamMember(member)">Edit</button>
+              <button *ngIf="member.isEditing" class="btn btn-sm btn-success"
+                (click)="saveTeamMember(member)">Save</button>
+              <button class="ms-3 btn btn-sm btn-danger" (click)="deleteTeamMember(member._id)">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -142,13 +172,26 @@
         </thead>
         <tbody>
           <tr *ngFor="let value of companyValues">
-            <td>{{value.title}}</td>
-            <td>{{value.description}}</td>
             <td>
-              <!-- <button class="btn btn-sm btn-warning mr-2" (click)="editCompanyValue(value)">Edit</button> -->
-              <button class="btn btn-sm btn-danger" (click)="deleteCompanyValue(value._id)">Delete</button>
+              <!-- Edit or Display Title -->
+              <input *ngIf="value.isEditing" type="text" [(ngModel)]="value.title" class="form-control" />
+              <span *ngIf="!value.isEditing">{{ value.title }}</span>
+            </td>
+            <td>
+              <!-- Edit or Display Description -->
+              <input *ngIf="value.isEditing" type="text" [(ngModel)]="value.description" class="form-control" />
+              <span *ngIf="!value.isEditing">{{ value.description }}</span>
+            </td>
+            <td>
+              <!-- Edit, Save or Delete buttons -->
+              <button *ngIf="!value.isEditing" class="btn btn-sm btn-primary mr-2"
+                (click)="editCompanyValue(value)">Edit</button>
+              <button *ngIf="value.isEditing" class="btn btn-sm btn-success"
+                (click)="saveCompanyValue(value)">Save</button>
+              <button class="ms-3 btn btn-sm btn-danger" (click)="deleteCompanyValue(value._id)">Delete</button>
             </td>
           </tr>
+
         </tbody>
       </table>
     </div>

@@ -17,6 +17,12 @@ export class AboutDashboardComponent implements OnInit {
   newCompanyValue: any = {};
   selectedFile: File | null = null;
 
+  editItem: any = {};
+  isEditingTimeline = false;
+  isEditingTeamMember = false;
+  isEditingCompanyValue = false;
+member: any;
+
   constructor(private aboutService: AboutService) {}
 
   ngOnInit() {
@@ -27,7 +33,9 @@ export class AboutDashboardComponent implements OnInit {
 
   // Timeline Methods
   loadTimeline() {
-    this.aboutService.getTimeline().subscribe((data: any[]) => (this.timeline = data));
+    this.aboutService
+      .getTimeline()
+      .subscribe((data: any[]) => (this.timeline = data));
   }
 
   addTimelineEntry() {
@@ -37,6 +45,18 @@ export class AboutDashboardComponent implements OnInit {
         this.timeline.push(response);
         this.newTimelineEntry = {};
       });
+  }
+  // Edit Timeline Entry
+  editTimelineEntry(entry: any) {
+    entry.isEditing = true; // Show input fields
+  }
+
+  // Save the edited Timeline Entry
+  saveTimelineEntry(entry: any) {
+    this.aboutService.updateTimelineEntry(entry._id, entry).subscribe(response => {
+      entry.isEditing = false; // Hide input fields after saving
+      this.loadTimeline(); // Refresh timeline data
+    });
   }
 
   deleteTimelineEntry(id: string) {
@@ -72,9 +92,11 @@ export class AboutDashboardComponent implements OnInit {
   }
 
   */
-
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
+  onFileSelected(event: any, member: any) {
+    const file = event.target.files[0];
+    if (file) {
+      member.image = file; // Store the selected file to the member object
+    }
   }
 
   addTeamMember() {
@@ -90,6 +112,28 @@ export class AboutDashboardComponent implements OnInit {
       this.teamMembers.push(response);
       this.newTeamMember = {};
       this.selectedFile = null;
+    });
+  }
+
+  // Edit Team Member
+  editTeamMember(member: any) {
+    member.isEditing = true; // Show input fields
+  }
+
+  // Save the edited Team Member
+  saveTeamMember(member: any) {
+    // If an image is selected, include it in the update
+    const formData = new FormData();
+    if (member.image instanceof File) {
+      formData.append('image', member.image);
+    }
+    formData.append('name', member.name);
+    formData.append('role', member.role);
+    formData.append('category', member.category);
+
+    this.aboutService.updateTeamMember(member._id, formData).subscribe(response => {
+      member.isEditing = false; // Hide input fields after saving
+      this.loadTeamMembers(); // Refresh team members data
     });
   }
 
@@ -114,6 +158,18 @@ export class AboutDashboardComponent implements OnInit {
         this.newCompanyValue = {};
       });
   }
+  // Edit Company Value
+  editCompanyValue(value: any) {
+    value.isEditing = true; // Show input fields
+  }
+
+  // Save the edited Company Value
+  saveCompanyValue(value: any) {
+    this.aboutService.updateCompanyValue(value._id, value).subscribe(response => {
+      value.isEditing = false; // Hide input fields after saving
+      this.loadCompanyValues(); // Refresh company values data
+    });
+  }
 
   deleteCompanyValue(id: string) {
     this.aboutService.deleteCompanyValue(id).subscribe(() => {
@@ -122,4 +178,6 @@ export class AboutDashboardComponent implements OnInit {
       );
     });
   }
+
+
 }
