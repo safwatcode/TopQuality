@@ -1,142 +1,179 @@
-<div class="container mt-4">
-  <h2 class="text-center">Manage About Page</h2>
+<div class="container">
+  <h2 class="mb-4">About Page Management</h2>
 
-  <!-- Edit About General Section -->
+  <!-- Timeline Management -->
   <div class="card mb-4">
-    <div class="card-header">
-      <h4>General Information</h4>
-    </div>
+    <div class="card-header">Timeline Entries</div>
     <div class="card-body">
-      <form (ngSubmit)="updateGeneralInfo()">
-        <div class="mb-3">
-          <label for="logo" class="form-label">Logo URL</label>
-          <input
-            type="text"
-            class="form-control"
-            id="logo"
-            [(ngModel)]="aboutData.logo"
-            name="logo"
-          />
+      <form (ngSubmit)="addTimelineEntry()" #timelineForm="ngForm">
+        <div class="row">
+          <div class="col-md-3">
+            <input type="number" class="form-control"
+              [(ngModel)]="newTimelineEntry.year"
+              name="year"
+              placeholder="Year"
+              required>
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control"
+              [(ngModel)]="newTimelineEntry.description"
+              name="description"
+              placeholder="Description"
+              required>
+          </div>
+          <div class="col-md-3">
+            <button type="submit" class="btn btn-primary"
+              [disabled]="!timelineForm.form.valid">
+              Add Timeline Entry
+            </button>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="heading" class="form-label">Heading</label>
-          <input
-            type="text"
-            class="form-control"
-            id="heading"
-            [(ngModel)]="aboutData.heading"
-            name="heading"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="subheading" class="form-label">Subheading</label>
-          <input
-            type="text"
-            class="form-control"
-            id="subheading"
-            [(ngModel)]="aboutData.subheading"
-            name="subheading"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary">Update General Info</button>
       </form>
+
+      <table class="table mt-3">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of timeline">
+            <td>{{entry.year}}</td>
+            <td>{{entry.description}}</td>
+            <td>
+              <!-- <button class="btn btn-sm btn-warning mr-2" (click)="editTimelineEntry(entry)">Edit</button> -->
+              <button class="btn btn-sm btn-danger" (click)="deleteTimelineEntry(entry._id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <!-- Edit Timeline Section -->
+  <!-- Team Members Management -->
   <div class="card mb-4">
-    <div class="card-header d-flex justify-content-between">
-      <h4>Timeline</h4>
-      <button class="btn btn-success btn-sm" (click)="addTimeline()">Add New</button>
-    </div>
+    <div class="card-header">Team Members</div>
     <div class="card-body">
-      <div *ngFor="let timeline of aboutData.timeline; let i = index" class="mb-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <input
-            type="text"
-            class="form-control me-2"
-            [(ngModel)]="timeline.year"
-            [name]="'timelineYear' + i"
-            placeholder="Year"
-          />
-          <input
-            type="text"
-            class="form-control me-2"
-            [(ngModel)]="timeline.description"
-            [name]="'timelineDesc' + i"
-            placeholder="Description"
-          />
-          <button class="btn btn-danger btn-sm" (click)="deleteTimeline(i)">Delete</button>
+      <form (ngSubmit)="addTeamMember()" #teamForm="ngForm">
+        <div class="row">
+          <div class="col-md-3">
+            <input type="text" class="form-control"
+              [(ngModel)]="newTeamMember.name"
+              name="name"
+              placeholder="Name"
+              required>
+          </div>
+          <div class="col-md-3">
+            <input type="text" class="form-control"
+              [(ngModel)]="newTeamMember.role"
+              name="role"
+              placeholder="Role"
+              required>
+          </div>
+          <div class="col-md-3">
+            <select class="form-control"
+              [(ngModel)]="newTeamMember.category"
+              name="category"
+              required>
+              <option value="">Select Category</option>
+              <option value="CEO">CEO</option>
+              <option value="Technician">Technician</option>
+              <option value="IT">IT</option>
+              <option value="Management">Management</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <input type="file" class="form-control"
+              (change)="onFileSelected($event)"
+              name="image">
+          </div>
         </div>
-      </div>
-      <button class="btn btn-primary" (click)="updateTimeline()">Save Timeline</button>
+        <button type="submit" class="btn btn-primary mt-2"
+          [disabled]="!teamForm.form.valid">
+          Add Team Member
+        </button>
+      </form>
+
+      <table class="table mt-3">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Category</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let member of teamMembers">
+            <td>
+              <img [src]="member.image ? '/uploads/' + member.image : ''"
+                   alt="{{member.name}}"
+                   style="max-width: 50px; max-height: 50px;">
+            </td>
+            <td>{{member.name}}</td>
+            <td>{{member.role}}</td>
+            <td>{{member.category}}</td>
+            <td>
+              <!-- <button class="btn btn-sm btn-warning mr-2" (click)="editTeamMember(member)">Edit</button> -->
+              <button class="btn btn-sm btn-danger" (click)="deleteTeamMember(member._id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <!-- Edit Team Section -->
-  <div class="card mb-4">
-    <div class="card-header d-flex justify-content-between">
-      <h4>Team</h4>
-      <button class="btn btn-success btn-sm" (click)="addTeamMember()">Add New</button>
-    </div>
+  <!-- Company Values Management -->
+  <div class="card">
+    <div class="card-header">Company Values</div>
     <div class="card-body">
-      <div *ngFor="let member of aboutData.team; let i = index" class="mb-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <input
-            type="text"
-            class="form-control me-2"
-            [(ngModel)]="member.name"
-            [name]="'teamName' + i"
-            placeholder="Name"
-          />
-          <input
-            type="text"
-            class="form-control me-2"
-            [(ngModel)]="member.role"
-            [name]="'teamRole' + i"
-            placeholder="Role"
-          />
-          <input
-            type="text"
-            class="form-control me-2"
-            [(ngModel)]="member.image"
-            [name]="'teamImage' + i"
-            placeholder="Image URL"
-          />
-          <button class="btn btn-danger btn-sm" (click)="deleteTeamMember(i)">Delete</button>
+      <form (ngSubmit)="addCompanyValue()" #valueForm="ngForm">
+        <div class="row">
+          <div class="col-md-4">
+            <input type="text" class="form-control"
+              [(ngModel)]="newCompanyValue.title"
+              name="title"
+              placeholder="Value Title"
+              required>
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control"
+              [(ngModel)]="newCompanyValue.description"
+              name="description"
+              placeholder="Description"
+              required>
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary"
+              [disabled]="!valueForm.form.valid">
+              Add Value
+            </button>
+          </div>
         </div>
-      </div>
-      <button class="btn btn-primary" (click)="updateTeam()">Save Team</button>
-    </div>
-  </div>
+      </form>
 
-  <!-- Edit Values Section -->
-  <div class="card mb-4">
-    <div class="card-header d-flex justify-content-between">
-      <h4>Company Values</h4>
-      <button class="btn btn-success btn-sm" (click)="addValue()">Add New</button>
-    </div>
-    <div class="card-body">
-      <div *ngFor="let value of aboutData.values; let i = index" class="mb-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <input
-            type="text"
-            class="form-control me-2"
-            [(ngModel)]="value.title"
-            [name]="'valueTitle' + i"
-            placeholder="Title"
-          />
-          <input
-            type="text"
-            class="form-control me-2"
-            [(ngModel)]="value.description"
-            [name]="'valueDesc' + i"
-            placeholder="Description"
-          />
-          <button class="btn btn-danger btn-sm" (click)="deleteValue(i)">Delete</button>
-        </div>
-      </div>
-      <button class="btn btn-primary" (click)="updateValues()">Save Values</button>
+      <table class="table mt-3">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let value of companyValues">
+            <td>{{value.title}}</td>
+            <td>{{value.description}}</td>
+            <td>
+              <!-- <button class="btn btn-sm btn-warning mr-2" (click)="editCompanyValue(value)">Edit</button> -->
+              <button class="btn btn-sm btn-danger" (click)="deleteCompanyValue(value._id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

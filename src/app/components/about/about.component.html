@@ -228,7 +228,7 @@
 </div> -->
 
 
-<div class="about p-5 text-center">
+<!-- <div class="about p-5 text-center">
   <img class="d-block mx-auto" [src]="aboutData?.logo" alt="Top Quality logo">
   <h1 class="about-head text-body-emphasis">{{ aboutData?.heading }}</h1>
   <p class="about-desc col-lg-8 mx-auto fs-5">
@@ -279,4 +279,75 @@
   </h1>
   <p>{{ aboutData?.cta.description }}</p>
   <a [routerLink]="aboutData?.cta.buttonLink" class="cta-button">{{ aboutData?.cta.buttonText }}</a>
+</div> -->
+
+<div class="container mt-5">
+  <!-- Our Journey Section -->
+  <h1 class="text-center my-0 mx-auto">Our Journey</h1>
+  <ul class="timeline">
+    <li *ngFor="let entry of timeline" class="timeline-item">
+      <div class="timeline-content">
+        <h3>{{entry.year}}</h3>
+        <p>{{entry.description}}</p>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Meet Our Team Section -->
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Meet Our Team</h1>
+    <div class="row">
+      <!-- CEOs -->
+      <div *ngFor="let member of teamMembers" class="col-md-4 mb-4">
+        <div class="team-member text-center">
+          <img
+            [src]="member.image ? '/uploads/' + member.image : 'assets/default-avatar.png'"
+            alt="{{member.name}}"
+            class="img-fluid rounded-circle mb-3"
+          >
+          <h3>{{member.name}}</h3>
+          <p>{{member.role}}</p>
+        </div>
+      </div>
+
+      <!-- Technicians -->
+      <div *ngFor="let member of teamMembers" class="col-md-4 mb-4">
+        <div class="team-member text-center">
+          <img
+            [src]="member.image ? '/uploads/' + member.image : 'assets/default-avatar.png'"
+            alt="{{member.name}}"
+            class="img-fluid rounded-circle mb-3"
+          >
+          <h3>{{member.name}}</h3>
+          <p>{{member.role}}</p>
+        </div>
+      </div>
+
+      <!-- IT and Management -->
+      <div *ngFor="let member of teamMembers" class="col-md-4 mb-4">
+        <div class="team-member text-center">
+          <img
+            [src]="member.image ? '/uploads/' + member.image : 'assets/default-avatar.png'"
+            alt="{{member.name}}"
+            class="img-fluid rounded-circle mb-3"
+          >
+          <h3>{{member.name}}</h3>
+          <p>{{member.role}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Our Company Values Section -->
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Our Company Values</h1>
+    <div class="value-row row">
+      <div *ngFor="let value of companyValues" class="value-card col-md-3 p-2">
+        <div class="value-card h-100 p-3 text-center">
+          <h3>{{value.title}}</h3>
+          <p>{{value.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

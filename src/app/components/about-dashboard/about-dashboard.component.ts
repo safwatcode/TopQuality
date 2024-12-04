@@ -1,78 +1,125 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AboutService } from '../../about.service';
 
 @Component({
   selector: 'app-about-dashboard',
   templateUrl: './about-dashboard.component.html',
-  styleUrls: ['./about-dashboard.component.css']
+  styleUrls: ['./about-dashboard.component.css'],
 })
 export class AboutDashboardComponent implements OnInit {
-  aboutData: any = {
-    logo: '',
-    heading: '',
-    subheading: '',
-    timeline: [],
-    team: [],
-    values: [],
-  };
+  timeline: any[] = [];
+  teamMembers: any[] = [];
+  companyValues: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  newTimelineEntry: any = {};
+  newTeamMember: any = {};
+  newCompanyValue: any = {};
+  selectedFile: File | null = null;
 
-  ngOnInit(): void {
-    this.fetchAboutData();
+  constructor(private aboutService: AboutService) {}
+
+  ngOnInit() {
+    this.loadTimeline();
+    this.loadTeamMembers();
+    this.loadCompanyValues();
   }
 
-  fetchAboutData() {
-    this.http.get('/api/about').subscribe((data: any) => {
-      this.aboutData = data;
+  // Timeline Methods
+  loadTimeline() {
+    this.aboutService.getTimeline().subscribe((data: any[]) => (this.timeline = data));
+  }
+
+  addTimelineEntry() {
+    this.aboutService
+      .createTimelineEntry(this.newTimelineEntry)
+      .subscribe((response: any) => {
+        this.timeline.push(response);
+        this.newTimelineEntry = {};
+      });
+  }
+
+  deleteTimelineEntry(id: string) {
+    this.aboutService.deleteTimelineEntry(id).subscribe(() => {
+      this.timeline = this.timeline.filter((entry) => entry._id !== id);
     });
   }
 
-  updateGeneralInfo() {
-    this.http.put('/api/about', this.aboutData).subscribe(() => {
-      alert('General information updated!');
-    });
+  // Team Member Methods
+  loadTeamMembers() {
+    this.aboutService.getTeamMembers().subscribe(
+      (data: any[]) => {
+        this.teamMembers = data;
+      },
+      (error: any) => {
+        console.error('Error loading Services:', error);
+      }
+    );
   }
 
-  updateTimeline() {
-    this.http.put('/api/about', this.aboutData).subscribe(() => {
-      alert('Timeline updated!');
-    });
+  /* As refrence for me
+ loadServices() {
+    this.servicesService.getServices().subscribe(
+      (data) => {
+        this.services = data;
+        this.isLoading = false; // Stop loading spinner
+      },
+      (error) => {
+        console.error('Error loading Services:', error);
+        this.isLoading = false; // Stop loading spinner
+      }
+    );
   }
 
-  addTimeline() {
-    this.aboutData.timeline.push({ year: '', description: '' });
-  }
+  */
 
-  deleteTimeline(index: number) {
-    this.aboutData.timeline.splice(index, 1);
-  }
-
-  updateTeam() {
-    this.http.put('/api/about', this.aboutData).subscribe(() => {
-      alert('Team updated!');
-    });
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
   }
 
   addTeamMember() {
-    this.aboutData.team.push({ name: '', role: '', image: '' });
-  }
+    const formData = new FormData();
+    formData.append('name', this.newTeamMember.name);
+    formData.append('role', this.newTeamMember.role);
+    formData.append('category', this.newTeamMember.category);
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
 
-  deleteTeamMember(index: number) {
-    this.aboutData.team.splice(index, 1);
-  }
-
-  updateValues() {
-    this.http.put('/api/about', this.aboutData).subscribe(() => {
-      alert('Values updated!');
+    this.aboutService.createTeamMember(formData).subscribe((response: any) => {
+      this.teamMembers.push(response);
+      this.newTeamMember = {};
+      this.selectedFile = null;
     });
   }
 
-  addValue() {
-    this.aboutData.values.push({ title: '', description: '' });
+  deleteTeamMember(id: string) {
+    this.aboutService.deleteTeamMember(id).subscribe(() => {
+      this.teamMembers = this.teamMembers.filter((member) => member._id !== id);
+    });
   }
 
-  deleteValue(index: number) {
-    this.aboutData.values.splice(index, 1);
+  // Company Values Methods
+  loadCompanyValues() {
+    this.aboutService
+      .getCompanyValues()
+      .subscribe((data: any[]) => (this.companyValues = data));
+  }
+
+  addCompanyValue() {
+    this.aboutService
+      .createCompanyValue(this.newCompanyValue)
+      .subscribe((response: any) => {
+        this.companyValues.push(response);
+        this.newCompanyValue = {};
+      });
+  }
+
+  deleteCompanyValue(id: string) {
+    this.aboutService.deleteCompanyValue(id).subscribe(() => {
+      this.companyValues = this.companyValues.filter(
+        (value) => value._id !== id
+      );
+    });
   }
 }

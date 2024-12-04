@@ -1,19 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { AboutService } from '../../about.service';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrl: './about.component.css',
+  styleUrls: ['./about.component.css'],
 })
 export class AboutComponent implements OnInit {
-  aboutData: any;
+  timeline: any[] = [];
+  teamMembers: any[] = [];
+  companyValues: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private aboutService: AboutService) {}
 
   ngOnInit() {
-    this.http.get('/api/about').subscribe((data) => {
-      this.aboutData = data;
-    });
+    this.loadTimeline();
+    this.loadTeamMembers();
+    this.loadCompanyValues();
+  }
+
+  loadTimeline() {
+    this.aboutService
+      .getTimeline()
+      .subscribe((data: any[]) => (this.timeline = data));
+  }
+
+  loadTeamMembers() {
+    this.aboutService
+      .getTeamMembers()
+      .subscribe((data: any[]) => (this.teamMembers = data));
+  }
+
+  loadCompanyValues() {
+    this.aboutService
+      .getCompanyValues()
+      .subscribe((data: any[]) => (this.companyValues = data));
+  }
+}
+
+// Custom pipe for filtering team members
+@Pipe({
+  name: 'filterTeam',
+})
+export class FilterTeamPipe implements PipeTransform {
+  transform(members: any[], categories: string): any[] {
+    if (!members || !categories) return members;
+    const categoryList = categories.split(',').map((cat) => cat.trim());
+    return members.filter((member) => categoryList.includes(member.category));
   }
 }
