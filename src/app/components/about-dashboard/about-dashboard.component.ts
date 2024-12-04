@@ -21,7 +21,7 @@ export class AboutDashboardComponent implements OnInit {
   isEditingTimeline = false;
   isEditingTeamMember = false;
   isEditingCompanyValue = false;
-member: any;
+  member: any;
 
   constructor(private aboutService: AboutService) {}
 
@@ -53,10 +53,12 @@ member: any;
 
   // Save the edited Timeline Entry
   saveTimelineEntry(entry: any) {
-    this.aboutService.updateTimelineEntry(entry._id, entry).subscribe(response => {
-      entry.isEditing = false; // Hide input fields after saving
-      this.loadTimeline(); // Refresh timeline data
-    });
+    this.aboutService
+      .updateTimelineEntry(entry._id, entry)
+      .subscribe((response) => {
+        entry.isEditing = false; // Hide input fields after saving
+        this.loadTimeline(); // Refresh timeline data
+      });
   }
 
   deleteTimelineEntry(id: string) {
@@ -72,7 +74,7 @@ member: any;
         this.teamMembers = data;
       },
       (error: any) => {
-        console.error('Error loading Services:', error);
+        console.error('Error loading Team Member:', error);
       }
     );
   }
@@ -131,10 +133,12 @@ member: any;
     formData.append('role', member.role);
     formData.append('category', member.category);
 
-    this.aboutService.updateTeamMember(member._id, formData).subscribe(response => {
-      member.isEditing = false; // Hide input fields after saving
-      this.loadTeamMembers(); // Refresh team members data
-    });
+    this.aboutService
+      .updateTeamMember(member._id, formData)
+      .subscribe((response) => {
+        member.isEditing = false; // Hide input fields after saving
+        this.loadTeamMembers(); // Refresh team members data
+      });
   }
 
   deleteTeamMember(id: string) {
@@ -165,10 +169,12 @@ member: any;
 
   // Save the edited Company Value
   saveCompanyValue(value: any) {
-    this.aboutService.updateCompanyValue(value._id, value).subscribe(response => {
-      value.isEditing = false; // Hide input fields after saving
-      this.loadCompanyValues(); // Refresh company values data
-    });
+    this.aboutService
+      .updateCompanyValue(value._id, value)
+      .subscribe((response) => {
+        value.isEditing = false; // Hide input fields after saving
+        this.loadCompanyValues(); // Refresh company values data
+      });
   }
 
   deleteCompanyValue(id: string) {
@@ -178,6 +184,4 @@ member: any;
       );
     });
   }
-
-
 }
